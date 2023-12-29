@@ -7,7 +7,9 @@ export const checkAuthUser = (): boolean => {
   return !!localStorage.getItem("jwt");
 };
 
-export const registerUser = async (registerData: Omit<UserRegisterDTO, "passwordConfirm">) => {
+export const registerUser = async (
+  registerData: Omit<UserRegisterDTO, "passwordConfirm">
+) => {
   try {
     const data = await axios.post(
       `${SERVER_URL}/auth/registration`,
@@ -15,7 +17,7 @@ export const registerUser = async (registerData: Omit<UserRegisterDTO, "password
     );
     return data.data;
   } catch (error: any) {
-    throw error.response.data || error.message || "Что-то пошло не так";
+    throw new Error("Что-то пошло не так, попробуйте позже");
   }
 };
 
@@ -24,6 +26,6 @@ export const loginUserAndGetToken = async (loginData: UserLoginDTO) => {
     const data = await axios.post(`${SERVER_URL}/auth/login`, loginData);
     return data.data;
   } catch (error: any) {
-    throw error.response.data || error.message || "Что-то пошло не так";
+    throw new Error("Что-то пошло не так, попробуйте позже");
   }
 };

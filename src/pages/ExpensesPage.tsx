@@ -6,17 +6,18 @@ import {
   openNewTransactionModal,
 } from "../store/reducers/extraSlice";
 import RecentTransactions from "../components/RecentTransactions";
+import { AnyAction, Dispatch } from "@reduxjs/toolkit";
 
-const ExpensesPage = () => {
+const ExpensesPage: React.FC = () => {
   const expenseCategoriesState = useAppSelector(
     (state) => state.expenseCategories
   );
   const expensesState = useAppSelector((state) => state.expenses);
   const { date } = useAppSelector((state) => state.extra);
 
-  const dispatch = useAppDispatch();
+  const dispatch: Dispatch<AnyAction> = useAppDispatch();
 
-  const overallMonthExpensesAmount = expensesState.expenses
+  const overallMonthExpensesAmount: number = expensesState.expenses
     .filter((exp) => new Date(exp.date).getMonth() === date.getMonth())
     .reduce((prev, exp) => prev + exp.amount, 0);
 
@@ -55,7 +56,11 @@ const ExpensesPage = () => {
           </Grid>
         ))}
       </Grid>
-      <RecentTransactions data={expensesState.expenses} type="expense" key={"expense"}/>
+      <RecentTransactions
+        data={expensesState.expenses}
+        type="expense"
+        key={"expense"}
+      />
     </Box>
   );
 };

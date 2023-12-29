@@ -1,4 +1,11 @@
-import { Backdrop, Box, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { countBalance } from "../common/utils";
 import MiniCategoryItem from "../components/MiniCategoryItem";
@@ -7,6 +14,7 @@ import SavingItem from "../components/SavingItem";
 import { useState } from "react";
 import NewSavingForm from "../components/NewSavingForm";
 import { openNewTransactionModal } from "../store/reducers/extraSlice";
+import PieChartComponent from "../components/PieChartComponent";
 
 const HomePage = () => {
   const savingsState = useAppSelector((state) => state.savings);
@@ -122,6 +130,20 @@ const HomePage = () => {
           <NewSavingForm close={() => setNewSavingModal(false)} />
         </Backdrop>
       )}
+      <Divider />
+      <Typography sx={{ textAlign: "center", my: 2 }} variant="h5">
+        Статистика:
+      </Typography>
+      <Stack
+        direction={{ xs: "column" }}
+        spacing={1}
+        // justifyContent={"center"}
+        // alignItems={"center"}
+      >
+        <PieChartComponent type="expense" propsData={expensesState.expenses} />
+        <Divider sx={{ py: 2 }} />
+        <PieChartComponent type="income" propsData={incomesState.incomes} />
+      </Stack>
     </Box>
   );
 };

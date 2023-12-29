@@ -16,7 +16,7 @@ const initialLoginData: UserLoginDTO = {
 
 const LoginForm: React.FC = () => {
   const [loginData, setLoginData] = useState<UserLoginDTO>(initialLoginData);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const dispatch: Dispatch<AnyAction> = useAppDispatch();
@@ -37,12 +37,17 @@ const LoginForm: React.FC = () => {
 
     loginUserAndGetToken(loginData)
       .then((data) => {
+
+        
         dispatch(login({ token: data.token, email: data.email }));
         setError("");
         navigate("/");
       })
       .catch((e) => {
-        setError(e);
+        console.log(e);
+        
+        setError(e.message);
+        
       })
       .finally(() => setLoading(false));
   };

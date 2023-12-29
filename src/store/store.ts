@@ -13,7 +13,7 @@ import savingReducer from "./reducers/savingSlice";
 import expenseCategoryReducer from "./reducers/expenseCategorySlice";
 // import storage from "redux-persist/es/storage";
 import storageSession from "redux-persist/lib/storage/session";
-import { PersistConfig, Persistor, persistReducer } from "redux-persist";
+import { Persistor, persistReducer } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
 import thunk from "redux-thunk";
 
